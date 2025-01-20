@@ -37,6 +37,7 @@ header, footer {
     font-size: 1rem;
     color: var(--secondary-color);
     text-decoration: none;
+    padding: 20px;
 }
 
 /* Links */
@@ -200,3 +201,5 @@ body fieldset {
         font-size: 1em;
     }
 }
+
+
