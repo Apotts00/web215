@@ -86,7 +86,7 @@ nav ul li a:hover {
 }
 
 footer {
-    grid-column: 1 / span 2; /* Footer spans both columns */
+    grid-column: auto / auto; /* Footer spans both columns */
     text-align: center;
     padding: 20px 0;
     background-color: #4CAF50;
