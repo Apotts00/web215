@@ -1,40 +1,83 @@
-header {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    font-size: 1rem;
-    color: var(--secondary-color);
-    text-decoration: none;
-    padding: 20px;
-    background-color: var(--primary-bg); /* Ensure it has the same background as body */
-    width: 100%; /* Make the header span the full width */
+/* Reset some basic elements for better styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-nav {
-    font-size: 1.5625rem;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+    display: grid;
+    gap: 20px; /* Space between grid items */
+}
+
+header {
+    grid-column: 1 / span 2; 
+    background-color: #4CAF50;
+    color: white;
     text-align: center;
-    box-shadow: 0 0 5px 3px #c353f4;
-    border-radius: 15px;
-    padding: 10px 20px;
-    margin-top: 10px; /* Add some spacing from other elements */
-    background-color: var(--primary-color); /* Make it stand out */
-    color: var(--secondary-color);
-    display: flex;
-    justify-content: center;
-    gap: 20px; /* Space between navigation links */
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
 }
 
 nav a {
-    color: var(--secondary-color);
     text-decoration: none;
-    font-weight: bold;
+    color: #fff;
+    padding: 8px 16px;
+    margin: 0 8px;
 }
 
 nav a:hover {
-    background-color: var(--hover-bg);
-    color: var(--hover-color);
-    padding: 5px 10px; /* Add padding to highlight hover state */
+    background-color: #333;
+    color: white;
     border-radius: 5px;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 2fr 1fr; 
+    gap: 20px;
+}
+
+article {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    margin-bottom: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    padding: 8px;
+    display: block;
+}
+
+nav ul li a:hover {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+}
+
+footer {
+    grid-column: 1 / span 2; /* Footer spans both columns */
+    text-align: center;
+    padding: 20px 0;
+    background-color: #333;
+    color: white;
 }
