@@ -14,7 +14,7 @@ body {
 }
 
 header {
-    grid-column: 1 / span 2; 
+    grid-column: auto / auto; 
     background-color: #4CAF50;
     color: white;
     text-align: center;
