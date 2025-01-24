@@ -11,7 +11,6 @@ body {
     color: #333;
     line-height: 1.6;
     padding: 20px;
-    display: grid;
     gap: 20px; 
     display: flex;
     justify-content: center;
