@@ -23,11 +23,16 @@ header {
     background-color: #1b51f2;
     color: white;
     padding: 20px;
-    width: 100%;
+    min-width: 100%;
+    text-align: center;
 }
 
 h1 {
     font-size: 2.5rem;
+    text-align: center;
+}
+h2 {
+    font-size: 1.5rem;
     text-align: center;
 }
 
