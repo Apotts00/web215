@@ -1,5 +1,5 @@
 /* Reset some basic elements for better styling */
-* {
+html {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -17,6 +17,8 @@ body {
     min-height: 100vh;
     padding: 20px;
     text-align: left;
+    border-left: 10px  #1b51f2;
+    border-right: 10px  #1b51f2;
 }
 
 header {
