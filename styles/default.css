@@ -1,11 +1,10 @@
-/* Reset some basic elements for better styling */
 html {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-html, body {
+body {
     font-family: Arial, sans-serif;
     background-color: #f2bc1b;
     color: #333;
