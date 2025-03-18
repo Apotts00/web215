@@ -21,7 +21,7 @@ body {
 }
 
 header {
-    width: 100%;
+    min-width: 100%;
     background-color: #1b51f2;
     color: white;
     padding: 20px;
@@ -67,7 +67,7 @@ footer {
     background-color: #1b51f2;
     color: white;
     padding: 20px;
-    width: 100%;
+    min-width: 100%;
     text-align: center;
 }
 
