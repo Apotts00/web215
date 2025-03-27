@@ -61,6 +61,13 @@ figure {
     text-align: center;
 }
 
+figure img {
+    width: 80%; 
+    max-width: 300px; 
+    height: auto; 
+  }
+}
+
 footer {
     background-color: #1b51f2;
     color: white;
@@ -76,13 +83,4 @@ footer a {
 
 footer a:hover {
     text-decoration: underline;
-}
-
-@media (max-width: 1150px) {
-  header {
-    padding: 10px;
-  }
-  h1 img {
-    height: 40px;
-  }
 }
