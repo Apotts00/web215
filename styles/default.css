@@ -20,6 +20,10 @@ body {
     overflow: auto;
 }
 
+p { 
+text-align: left;    
+}
+
 header {
     min-width: 100%;
     background-color: #1b51f2;
