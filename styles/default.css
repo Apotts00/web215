@@ -18,7 +18,8 @@ header {
     min-width: 100%;
     background-color: #1b51f2;
     color: white;
-    padding: 0;
+    padding: 10px;
+    padding-top: 0;
     text-align: center;
 }
 
