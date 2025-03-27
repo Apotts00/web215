@@ -8,7 +8,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 0;
+    padding: 10px;
     text-align: left;
     margin: 0;
     overflow: auto;
@@ -18,7 +18,7 @@ header {
     min-width: 100%;
     background-color: #1b51f2;
     color: white;
-    padding: 10px;
+    padding: 0;
     text-align: center;
 }
 
