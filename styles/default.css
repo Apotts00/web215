@@ -13,8 +13,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 300vh;
-    min-width: 200vh;
+    min-height: 0;
+    min-width: 0;
     padding: 50px;
     margin: 5px;
     text-align: left;
