@@ -19,6 +19,7 @@ body {
     margin: 5px;
     text-align: left;
     min-height: 100vh;
+    overflow: auto;
 }
 
 header {
