@@ -25,8 +25,8 @@ header {
     min-width: 100%;
     background-color: #1b51f2;
     color: white;
-    padding: 10px;
-    padding-top: 0;
+    padding: 0;
+    margin: 0;
     text-align: center;
     font-size: 1.5rem;
 }
