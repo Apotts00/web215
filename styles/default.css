@@ -15,7 +15,7 @@ body {
     align-items: center;
     min-height: 100vh;
     max-width: 100%;
-    padding: 0;
+    padding: 50px;
     margin: 5px;
     text-align: left;
     overflow: auto;    
