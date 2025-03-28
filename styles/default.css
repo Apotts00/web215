@@ -2,7 +2,7 @@ HTML {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    height: 100%;
+    height: 100vh;
     width: 100%;
 }
 
@@ -16,7 +16,6 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 0 3px;
-    margin: 5px;
     text-align: left;
     min-height: 100vh;
     overflow: auto;
@@ -79,7 +78,7 @@ figure img {
 footer {
     background-color: #1b51f2;
     color: white;
-    padding: 0;
+    padding: 10px 0;
     margin: 0;
     min-width: 100%;
     text-align: center;
