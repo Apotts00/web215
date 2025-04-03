@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2bc1b;
+    color: #333;
+    margin: 0 auto;
+    width: 95%;
+    max-width: 1000px;
+    line-height: 1.6;
+    text-align: left;
+}
+
+header, footer {
+    background-color: #1b51f2;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+h1, h2 {
+    font-family: 'Georgia', serif;
+    text-align: center;
+}
+
+a {
+    color: #4CAF50;
+}
+
+a:visited {
+    color: #4CAF50;
+}
+
+a:hover {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+}
+
+main {
+    padding: 5px;
+}
+
+figure {
+    text-align: center;
+}
+
+figure img {
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+}
