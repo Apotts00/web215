@@ -23,13 +23,13 @@ h1, h2 {
 }
 
 a {
-    color: #990094;
+    color: #f2bc1b;
     text-decoration: none;
     background-color: #FFF;
 }
 
 a:visited {
-    color: white;
+    color: #990094;
 }
 
 a:hover {
