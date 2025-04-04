@@ -26,6 +26,7 @@ a {
     color: #f2bc1b;
     text-decoration: none;
     background-color: #FFF;
+    text-shadow: 2px 2px 4px #000000;
 }
 
 a:visited {
