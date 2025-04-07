@@ -39,6 +39,14 @@ a:hover {
     border-radius: 5px;
 }
 
+nav a {
+    color: #f2bc1b;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
 main {
     padding: 5px;
 }
