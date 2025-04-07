@@ -10,11 +10,12 @@ body {
 }
 
 header, footer {
+    min-width: 100%;
     background-color: #1b51f2;
     color: white;
+    padding: 5px 0;
     text-align: center;
-    padding: 10px 0;
-    text-decoration: none;
+    font-size: 1.5rem;
 }
 
 h1, h2 {
