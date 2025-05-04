@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -40,6 +41,7 @@ const LoginPage = () => {
         <button type="submit">Login</button>
       </form>
     </div>
+  <p>Don't have an account? <Link to="/register">Register here</Link></p>
   );
 };
 
