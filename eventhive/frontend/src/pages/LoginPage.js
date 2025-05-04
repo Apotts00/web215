@@ -13,8 +13,7 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`
-, { email, password });
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, { email, password });
       localStorage.setItem('token', response.data.token);
       history.push('/dashboard');
     } catch (err) {
@@ -41,9 +40,12 @@ const LoginPage = () => {
         {error && <p>{error}</p>}
         <button type="submit">Login</button>
       </form>
+
+      {/* Wrap the "Don't have an account?" part with the rest */}
+      <p>Don't have an account? <Link to="/register">Register here</Link></p>
     </div>
-  <p>Don't have an account? <Link to="/register">Register here</Link></p>
   );
 };
 
 export default LoginPage;
+
