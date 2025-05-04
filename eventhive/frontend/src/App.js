@@ -4,6 +4,9 @@ import PrivateRoute from './components/PrivateRoute'; // ✅ now correct
 
 import DashboardPage from './pages/DashboardPage';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './components/RegisterPage';
+
+<Route path="/register" element={<RegisterPage />} />
 
 function App() {
   return (
