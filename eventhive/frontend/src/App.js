@@ -6,14 +6,15 @@ import DashboardPage from './pages/DashboardPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './components/RegisterPage';
 
-<Route path="/register" element={<RegisterPage />} />
-
 function App() {
   return (
     <Router>
       <Routes>
         {/* Public Route */}
-        <Route path="/" element={<LoginPage/>} />
+        <Route path="/" element={<LoginPage />} />
+
+        {/* Register Page Route */}
+        <Route path="/register" element={<RegisterPage />} />
 
         {/* Protected Route */}
         <Route 
@@ -27,11 +28,7 @@ function App() {
 
         {/* Login Page */}
         <Route path="/login" element={<LoginPage />} />
-      </Routes>
-    </Router>
-  );
-}
+     
 
-export default App;
 
 
