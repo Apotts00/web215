@@ -32,6 +32,9 @@ const RegisterPage = () => {
         {error && <p>{error}</p>}
         <button type="submit">Register</button>
       </form>
+    <input name="email" type="email" placeholder="Email" autoComplete="email" />
+<input name="password" type="password" placeholder="Password" autoComplete="new-password" />
+
     </div>
   );
 };
