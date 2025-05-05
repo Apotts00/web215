@@ -16,7 +16,7 @@ const RegisterPage = () => {
 
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/register`, formData);
-      navigate('/login'); // redirect to login after successful registration
+      navigate('/login');
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
     }
@@ -26,17 +26,37 @@ const RegisterPage = () => {
     <div>
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
-        <input name="name" placeholder="Name" onChange={handleChange} required />
-        <input name="email" type="email" placeholder="Email" onChange={handleChange} required />
-        <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
+        <input
+          name="name"
+          placeholder="Name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          autoComplete="email"
+          required
+        />
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          autoComplete="new-password"
+          required
+        />
         {error && <p>{error}</p>}
         <button type="submit">Register</button>
       </form>
-    <input name="email" type="email" placeholder="Email" autoComplete="email" />
-<input name="password" type="password" placeholder="Password" autoComplete="new-password" />
-
     </div>
   );
 };
 
 export default RegisterPage;
+
