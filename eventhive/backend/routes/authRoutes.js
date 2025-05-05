@@ -46,3 +46,24 @@ router.post('/login', async (req, res) => {
 
 module.exports = router;
 
+// Create Test User (for debugging only — remove in production!)
+router.post('/test-user', async (req, res) => {
+  try {
+    const existing = await User.findOne({ email: 'test@example.com' });
+    if (existing) return res.status(400).json({ message: 'Test user already exists' });
+
+    const hashedPassword = await bcrypt.hash('password123', 10);
+    const user = new User({
+      username: 'Test User',
+      email: 'test@example.com',
+      password: hashedPassword,
+    });
+
+    await user.save();
+    res.status(201).json({ message: 'Test user created successfully' });
+  } catch (err) {
+    res.status(500).json({ message: 'Error creating test user' });
+  }
+});
+
+
