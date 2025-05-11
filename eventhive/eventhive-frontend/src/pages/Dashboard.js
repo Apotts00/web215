@@ -17,14 +17,17 @@ const Dashboard = () => {
   try {
     const token = localStorage.getItem('token');
     if (!token) {
-      console.error('No token found in localStorage');
       navigate('/login');
       return;
     }
-    const response = await axios.get(`$eventhive-55x2.onrender.com/api/dashboard`, {
-  headers: { Authorization: `Bearer ${token}` },
-});
-    setEvents(response.data);
+    const response = await axios.get(`${API_URL}/api/events`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    console.log('Fetched events:', response.data); // <-- inspect this
+    const data = Array.isArray(response.data)
+      ? response.data
+      : response.data.events || [];
+    setEvents(data);
   } catch (err) {
     console.error('Error fetching events:', err.response?.data || err.message);
     if (err.response?.status === 401) {
@@ -33,7 +36,6 @@ const Dashboard = () => {
     }
   }
 };
-
 
     fetchEvents();
   }, [API_URL, navigate]);
