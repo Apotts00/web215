@@ -21,10 +21,10 @@ const Dashboard = () => {
           navigate('/login');
           return;
         }
-       axios.get(`https://eventhive-55x2.onrender.com/api/dashboard`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setEvents(response.data);
+       const response = await axios.get(`https://eventhive-55x2.onrender.com/api/dashboard`, {
+  headers: { Authorization: `Bearer ${token}` },
+});
+    setEvents(response.data);
       } catch (err) {
         console.error('Error fetching events:', err.response?.data || err.message);
         if (err.response?.status === 401) {
