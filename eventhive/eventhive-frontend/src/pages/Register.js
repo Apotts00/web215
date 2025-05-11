@@ -5,7 +5,7 @@ import './Login.css'; // Optional CSS file
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
     password: ''
   });
@@ -42,9 +42,9 @@ const Register = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="name"
+          name="username"
           placeholder="Name"
-          value={formData.name}
+          value={formData.username}
           onChange={handleChange}
           required
         /><br />
