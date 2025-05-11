@@ -1,0 +1,73 @@
+/* Login.css */
+body {
+    background: linear-gradient(to right, #74ebd5, #acb6e5);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .login-card {
+    background-color: #ffffff;
+    padding: 2rem 3rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    animation: floatIn 0.7s ease-out forwards;
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  
+  @keyframes floatIn {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .login-card h2 {
+    margin-bottom: 1rem;
+    color: #4a4a4a;
+  }
+  
+  .login-card input {
+    width: 100%;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border: none;
+    border-radius: 0.75rem;
+    background: #f3f3f3;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+  }
+  
+  .login-card input:focus {
+    background: #e0e0e0;
+    outline: none;
+  }
+  
+  .login-card button {
+    margin-top: 1rem;
+    background: #74ebd5;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+  }
+  
+  .login-card button:hover {
+    background: #58d8c3;
+  }
+  
+  .login-card p {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #d9534f;
+  }
