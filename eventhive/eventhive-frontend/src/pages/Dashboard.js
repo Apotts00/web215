@@ -14,25 +14,26 @@ const Dashboard = () => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-          console.error('No token found in localStorage');
-          navigate('/login');
-          return;
-        }
-       const response = await axios.get(`https://eventhive-55x2.onrender.com/api/dashboard`, {
-  headers: { Authorization: `Bearer ${token}` },
-});
+  try {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.error('No token found in localStorage');
+      navigate('/login');
+      return;
+    }
+    const response = await axios.get(`https://eventhive-55x2.onrender.com/api/events`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     setEvents(response.data);
-      } catch (err) {
-        console.error('Error fetching events:', err.response?.data || err.message);
-        if (err.response?.status === 401) {
-          localStorage.removeItem('token');
-          navigate('/login');
-        }
-      }
-    };
+  } catch (err) {
+    console.error('Error fetching events:', err.response?.data || err.message);
+    if (err.response?.status === 401) {
+      localStorage.removeItem('token');
+      navigate('/login');
+    }
+  }
+};
+
 
     fetchEvents();
   }, [API_URL, navigate]);
