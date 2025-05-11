@@ -11,7 +11,7 @@ const EventPage = () => {
     const fetchEvent = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`http://localhost:5000/api/events/${id}`, {
+        const response = await axios.get(`eventhive-55x2.onrender.com/api/events/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setEvent(response.data);
