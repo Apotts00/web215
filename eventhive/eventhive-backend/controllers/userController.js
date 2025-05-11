@@ -9,7 +9,6 @@ const createTestUser = async () => {
 
       const user = new User({
         name: 'Test User',
-        username: 'testuser',
         email: 'test@example.com',
         password: hashedPassword,
       });
