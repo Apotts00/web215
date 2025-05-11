@@ -1,0 +1,59 @@
+.dashboard-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Form styles */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background-color: #f8f8f8;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input,
+textarea {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 0.6rem;
+  background-color: #116e68;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0e5e59;
+}
+
+/* Events list */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 2rem;
+}
+
+li {
+  padding: 0.75rem;
+  background: #e2f0ee;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+li:hover {
+  background: #cce7e3;
+}
