@@ -14,7 +14,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post('https://eventhive-55x2.onrender.com/api/auth/login',  { email, password });
-      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('token', res.data.token);
       navigate('/dashboard');
     } catch (err) {
       console.error(err.response.data);
