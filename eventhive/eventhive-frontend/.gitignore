@@ -27,5 +27,9 @@ yarn-error.log*
 /eventhive-frontend/.env
 /eventhive-backend/.env
 
-/server/node_modules
-/eventhive-backend/node_modules
+**/node_modules/
+
+.vscode/
+.idea/
+*.swp
+
