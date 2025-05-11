@@ -10,6 +10,7 @@ const Dashboard = () => {
   const [newEventLocation, setNewEventLocation] = useState('');
   const [newEventDate, setNewEventDate] = useState('');
   const navigate = useNavigate();
+  const API_URL = process.env.REACT_APP_API_URL;
 
  useEffect(() => {
   const fetchEvents = async () => {
@@ -20,7 +21,7 @@ const Dashboard = () => {
         return;
       }
       console.log('Token:', token); // Log token
-      const response = await axios.get('http://localhost:5000/api/events', {
+      const response = await axios.get(`${API_URL}/api/events`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setEvents(response.data);
@@ -37,8 +38,7 @@ const Dashboard = () => {
   e.preventDefault();
   try {
     const token = localStorage.getItem('token');
-    const response = await axios.post(
-      'http://localhost:5000/api/events',
+    const response = await axios.get(`${API_URL}/api/events`,
       {
         title: newEventName,
         description: newEventDescription,
