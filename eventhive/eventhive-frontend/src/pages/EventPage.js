@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const EventPage = () => {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
@@ -25,11 +27,10 @@ const EventPage = () => {
   const handleAddItem = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post(
-        `http://localhost:5000/api/events/${id}/checklist`,
-        { item: checklistItem },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+     await axios.post(`${API_URL}/api/events/${id}/checklist`,
+  { item: checklistItem },
+  { headers: { Authorization: `Bearer ${token}` } }
+);
       setEvent((prevEvent) => ({
         ...prevEvent,
         checklist: [...prevEvent.checklist, { item: checklistItem, completed: false }]
