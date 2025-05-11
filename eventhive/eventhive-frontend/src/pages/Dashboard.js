@@ -21,9 +21,9 @@ const Dashboard = () => {
       navigate('/login');
       return;
     }
-    const response = await axios.get(`https://eventhive-55x2.onrender.com/api/dashboard`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await axios.get(`${API_URL}/api/dashboard`, {
+  headers: { Authorization: `Bearer ${token}` },
+});
     setEvents(response.data);
   } catch (err) {
     console.error('Error fetching events:', err.response?.data || err.message);
