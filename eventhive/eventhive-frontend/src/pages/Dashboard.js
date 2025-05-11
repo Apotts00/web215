@@ -43,7 +43,7 @@ const Dashboard = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        `${API_URL}/api/events`,
+        `$eventhive-55x2.onrender.com/api/events`,
         {
           title: newEventName,
           description: newEventDescription,
