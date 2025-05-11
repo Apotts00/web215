@@ -14,28 +14,28 @@ const Dashboard = () => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-  try {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      navigate('/login');
-      return;
-    }
-    const response = await axios.get(`${API_URL}/api/auth/dashboard`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    console.log('Fetched events:', response.data); // <-- inspect this
-    const data = Array.isArray(response.data)
-      ? response.data
-      : response.data.events || [];
-    setEvents(data);
-  } catch (err) {
-    console.error('Error fetching events:', err.response?.data || err.message);
-    if (err.response?.status === 401) {
-      localStorage.removeItem('token');
-      navigate('/login');
-    }
-  }
-};
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          navigate('/login');
+          return;
+        }
+        const response = await axios.get(`${API_URL}/api/events`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        console.log('Fetched events:', response.data);
+        const data = Array.isArray(response.data)
+          ? response.data
+          : response.data.events || [];
+        setEvents(data);
+      } catch (err) {
+        console.error('Error fetching events:', err.response?.data || err.message);
+        if (err.response?.status === 401) {
+          localStorage.removeItem('token');
+          navigate('/login');
+        }
+      }
+    };
 
     fetchEvents();
   }, [API_URL, navigate]);
@@ -45,7 +45,7 @@ const Dashboard = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        `$eventhive-55x2.onrender.com/api/events`,
+        `${API_URL}/api/events`,
         {
           title: newEventName,
           description: newEventDescription,
@@ -104,8 +104,8 @@ const Dashboard = () => {
         <button type="submit">Create Event</button>
       </form>
       <ul>
-        {events.map((event) => (
-          <li key={event._id} onClick={() => handleEventClick(event._id)}>
+        {events.map((event, index) => (
+          <li key={event._id || index} onClick={() => handleEventClick(event._id)}>
             {event.title}
           </li>
         ))}
@@ -115,4 +115,5 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
 
