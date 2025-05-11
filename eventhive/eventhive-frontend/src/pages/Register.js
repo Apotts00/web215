@@ -25,7 +25,8 @@ const Register = () => {
     setError('');
 
     try {
-      const response = await axios.post(`${API_URL}/api/auth/register`, formData);
+      console.log('Submitting registration:', formData);
+      const response = await axios.post(`eventhive-55x2.onrender.com/api/auth/register`, formData);
       localStorage.setItem('token', response.data.token);
       navigate('/dashboard');
     } catch (err) {
