@@ -8,7 +8,7 @@ const createTestUser = async () => {
       const hashedPassword = await bcrypt.hash('password123', 10);
 
       const user = new User({
-        name: 'Test User',
+        username: 'Test User',
         email: 'test@example.com',
         password: hashedPassword,
       });
