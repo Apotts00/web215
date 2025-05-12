@@ -17,8 +17,10 @@ const Login = () => {
       localStorage.setItem('token', res.data.token);
       navigate('/dashboard');
     } catch (err) {
-      console.error(err.response.data);
-    }
+  console.error(err.response?.data || err.message);
+  setError(err.response?.data?.message || 'Login failed');
+}
+
   };
 
   return (
@@ -28,7 +30,8 @@ const Login = () => {
         <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         <button type="submit">Login</button>
-  <p className="register-link">
+      {error && <p className="error-message">{error}</p>}
+      <p className="register-link">
         Don't have an account? <Link to="/register">Register here</Link>.
       </p>
       </form>
