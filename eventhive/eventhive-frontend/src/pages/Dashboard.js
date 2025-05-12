@@ -37,7 +37,7 @@ const Dashboard = () => {
     };
 
     fetchEvents();
-  }, [API_URL, navigate]);
+  }, [navigate]);
 
   const handleCreateEvent = async (e) => {
     e.preventDefault();
@@ -114,5 +114,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-
