@@ -1,75 +1,58 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import './Login.css'; // Optional CSS file
+import './Register.css';
 
 const Register = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: ''
-  });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-
     try {
-      console.log('Submitting registration:', formData);
-      const response = await axios.post(`eventhive-55x2.onrender.com/api/auth/register`, formData);
-      localStorage.setItem('token', response.data.token);
-      navigate('/dashboard');
+      const res = await fetch('https://eventhive-55x2.onrender.com/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Registration failed');
+
+      navigate('/login');
     } catch (err) {
-      console.error(err.response?.data);
-      setError(err.response?.data?.msg || 'Registration failed');
+      console.error(err.message);
+      setError(err.message);
     }
   };
 
   return (
-    <div className="register-container">
+    <div>
       <h2>Register</h2>
-      {error && <p className="error-msg">{error}</p>}
-
       <form onSubmit={handleSubmit}>
         <input
-          type="text"
-          name="username"
-          placeholder="Name"
-          value={formData.username}
-          onChange={handleChange}
-          required
-        /><br />
-        <input
           type="email"
-          name="email"
           placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
-        /><br />
+        />
         <input
           type="password"
-          name="password"
           placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           required
-        /><br />
+        />
         <button type="submit">Register</button>
+        {error && <p className="error-message">{error}</p>}
+        <p className="login-link">
+          Already have an account? <Link to="/login">Login here</Link>.
+        </p>
       </form>
-
-      <p className="login-link">
-        Already have an account? <Link to="/login">Login here</Link>.
-      </p>
     </div>
   );
 };
