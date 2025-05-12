@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     <header className="app-header">
-      <h1 className="logo">EventHive</h1>
+      <h1 className="logo">🎉Welcome to EventHive🎉</h1>
       <nav>
         <Link to="/">Home</Link>
         <Link to="/dashboard">Dashboard</Link>
