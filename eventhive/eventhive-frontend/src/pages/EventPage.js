@@ -37,7 +37,6 @@ const EventPage = () => {
     setEditedEvent({
       title: event.title,
       description: event.description,
-      location: event.location,
       date: event.date.slice(0, 10)
     });
   };
@@ -95,7 +94,6 @@ const EventPage = () => {
           <tr>
             <th>Title</th>
             <th>Description</th>
-            <th>Location</th>
             <th>Date</th>
             <th>Actions</th>
           </tr>
@@ -107,7 +105,6 @@ const EventPage = () => {
                 <>
                   <td><input type="text" value={editedEvent.title} onChange={(e) => setEditedEvent({ ...editedEvent, title: e.target.value })} /></td>
                   <td><textarea value={editedEvent.description} onChange={(e) => setEditedEvent({ ...editedEvent, description: e.target.value })} /></td>
-                  <td><input type="text" value={editedEvent.location} onChange={(e) => setEditedEvent({ ...editedEvent, location: e.target.value })} /></td>
                   <td><input type="date" value={editedEvent.date} onChange={(e) => setEditedEvent({ ...editedEvent, date: e.target.value })} /></td>
                   <td>
                     <button onClick={(e) => handleUpdateEvent(e, event._id)}>Save</button>
@@ -118,7 +115,6 @@ const EventPage = () => {
                 <>
                   <td>{event.title}</td>
                   <td>{event.description}</td>
-                  <td>{event.location}</td>
                   <td>{new Date(event.date).toLocaleDateString()}</td>
                   <td>
                     <button onClick={() => startEditing(event)}>Edit</button>
