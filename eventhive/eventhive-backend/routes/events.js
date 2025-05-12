@@ -1,99 +1,64 @@
 const express = require('express');
-const Event = require('../models/Event');
-const auth = require('../middleware/auth'); // <-- USE IMPORTED MIDDLEWARE
-
 const router = express.Router();
+const Event = require('../models/Event');
+const authMiddleware = require('../middleware/auth');
 
-// Create event
-router.post('/', auth, async (req, res) => {
-  try {
-    const newEvent = new Event({ ...req.body, user: req.user.id });
-    const savedEvent = await newEvent.save();
-    res.json(savedEvent);
-  } catch (err) {
-    console.error('Error saving event:', err.message); // <-- Add this
-    res.status(500).json({ msg: 'Server error' });
-  }
-});
-
-// Get all events for logged-in user
-router.get('/', auth, async (req, res) => {
+// GET all events for authenticated user
+router.get('/', authMiddleware, async (req, res) => {
   try {
     const events = await Event.find({ user: req.user.id });
     res.json(events);
   } catch (err) {
-    res.status(500).json({ msg: 'Server error' });
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
-// Update event
-router.put('/:id', auth, async (req, res) => {
+// POST create new event
+router.post('/', authMiddleware, async (req, res) => {
   try {
-    const updated = await Event.findOneAndUpdate(
-      { _id: req.params.id, user: req.user.id },
-      req.body,
-      { new: true }
-    );
-    res.json(updated);
+    const { title, description, location, date, checklist } = req.body;
+
+    const newEvent = new Event({
+      title,
+      description,
+      location,
+      date,
+      checklist,
+      user: req.user.id,
+    });
+
+    const savedEvent = await newEvent.save();
+    res.status(201).json(savedEvent);
   } catch (err) {
-    res.status(500).json({ msg: 'Server error' });
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
-// Delete event
-router.delete('/:id', auth, async (req, res) => {
-  try {
-    await Event.findOneAndDelete({ _id: req.params.id, user: req.user.id });
-    res.json({ msg: 'Event deleted' });
-  } catch (err) {
-    res.status(500).json({ msg: 'Server error' });
-  }
-});
-
-// Add checklist item
-router.post('/:id/checklist', auth, async (req, res) => {
+// GET single event by ID
+router.get('/:id', authMiddleware, async (req, res) => {
   try {
     const event = await Event.findOne({ _id: req.params.id, user: req.user.id });
-    if (!event) return res.status(404).json({ msg: 'Event not found' });
-
-    event.checklist.push({ item: req.body.item, completed: false });
-    await event.save();
+    if (!event) return res.status(404).json({ message: 'Event not found' });
     res.json(event);
   } catch (err) {
-    res.status(500).json({ msg: 'Server error' });
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
-// Update checklist item
-router.put('/:eventId/checklist/:itemId', auth, async (req, res) => {
+// POST add checklist item
+router.post('/:id/checklist', authMiddleware, async (req, res) => {
   try {
-    const event = await Event.findOne({ _id: req.params.eventId, user: req.user.id });
-    if (!event) return res.status(404).json({ msg: 'Event not found' });
+    const { item } = req.body;
+    const event = await Event.findOne({ _id: req.params.id, user: req.user.id });
 
-    const item = event.checklist.id(req.params.itemId);
-    if (!item) return res.status(404).json({ msg: 'Checklist item not found' });
+    if (!event) return res.status(404).json({ message: 'Event not found' });
 
-    item.item = req.body.item ?? item.item;
-    item.completed = req.body.completed ?? item.completed;
-
+    event.checklist.push({ item, completed: false });
     await event.save();
+
     res.json(event);
   } catch (err) {
-    res.status(500).json({ msg: 'Server error' });
-  }
-});
-
-// Delete checklist item
-router.delete('/:eventId/checklist/:itemId', auth, async (req, res) => {
-  try {
-    const event = await Event.findOne({ _id: req.params.eventId, user: req.user.id });
-    if (!event) return res.status(404).json({ msg: 'Event not found' });
-
-    event.checklist.id(req.params.itemId).remove();
-    await event.save();
-    res.json(event);
-  } catch (err) {
-    res.status(500).json({ msg: 'Server error' });
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
