@@ -81,7 +81,6 @@ const EventPage = () => {
 
   return (
     <div>
-      <Header />
       <h2>All Events</h2>
       <table className="event-table">
         <thead>
