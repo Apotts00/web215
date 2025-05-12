@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
+import Header from '../components/Header';
 
 const Dashboard = () => {
   const [events, setEvents] = useState([]);
