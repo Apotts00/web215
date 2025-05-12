@@ -12,6 +12,7 @@ const Dashboard = () => {
   const [editingEventId, setEditingEventId] = useState(null);
   const [editedEvent, setEditedEvent] = useState({ title: '', description: '', location: '', date: '' });
   const [successMessage, setSuccessMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -50,6 +51,7 @@ const Dashboard = () => {
 
   const handleCreateEvent = async (e) => {
   e.preventDefault();
+  setIsLoading(true); // ⏳ Start loading
   try {
     const token = localStorage.getItem('token');
     const response = await fetch('https://eventhive-55x2.onrender.com/api/events', {
@@ -72,16 +74,18 @@ const Dashboard = () => {
 
     setSuccessMessage('Event created successfully!');
     setTimeout(() => {
+      setSuccessMessage('');
       navigate(`/event/${data._id}`);
     }, 1500);
 
-    // Optionally clear the form
     setNewEventName('');
     setNewEventDescription('');
     setNewEventLocation('');
     setNewEventDate('');
   } catch (err) {
     console.error(err.message);
+  } finally {
+    setIsLoading(false); // ✅ Stop loading
   }
 };
 
@@ -144,8 +148,8 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
-      <h2>Your Events</h2>
+    <h2>Create a New Event</h2>
+      {successMessage && <p className="success-message">{successMessage}</p>}
       <form onSubmit={handleCreateEvent}>
         <input
           type="text"
