@@ -19,7 +19,7 @@ const Dashboard = () => {
           navigate('/login');
           return;
         }
-        const response = await axios.get(`https://eventhive-55x2.onrender.com/api/eventpage`, {
+        const response = await axios.get(`https://eventhive-55x2.onrender.com/api/events`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         console.log('Fetched events:', response.data);
@@ -44,7 +44,7 @@ const Dashboard = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        `https://eventhive-55x2.onrender.com/api/eventpage`,
+        `https://eventhive-55x2.onrender.com/api/events`,
         {
           title: newEventName,
           description: newEventDescription,
