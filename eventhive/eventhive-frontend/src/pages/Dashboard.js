@@ -137,6 +137,7 @@ const Dashboard = () => {
 
   return (
     <div>
+     <Header />
       <h2>Your Events</h2>
       <form onSubmit={handleCreateEvent}>
         <input
