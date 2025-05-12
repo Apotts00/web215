@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
 
 const EventPage = () => {
   const { id } = useParams();
@@ -65,6 +66,7 @@ const EventPage = () => {
 
   return (
     <div>
+    <Header />
       <h2>{event.title}</h2>
       <h3>Checklist</h3>
       <ul>
