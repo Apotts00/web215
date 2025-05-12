@@ -148,6 +148,7 @@ const Dashboard = () => {
   };
 
   return (
+    <div>
     <h2>Create a New Event</h2>
       {successMessage && <p className="success-message">{successMessage}</p>}
       <form onSubmit={handleCreateEvent}>
