@@ -4,10 +4,12 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import EventPage from './pages/EventPage';
 import Home from './Home'; // Create this component
+import Header from './components/Header';
 
 function App() {
   return (
     <Router>
+    <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
