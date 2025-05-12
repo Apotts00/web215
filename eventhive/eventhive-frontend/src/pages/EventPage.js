@@ -67,6 +67,25 @@ const EventPage = () => {
   return (
     <div>
       <h2>{event.title}</h2>
+    <h3>Event Details</h3>
+<table className="event-table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Location</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{event.title}</td>
+      <td>{event.description}</td>
+      <td>{event.location}</td>
+      <td>{new Date(event.date).toLocaleDateString()}</td>
+    </tr>
+  </tbody>
+</table>
 
   <h3>Location</h3>
 <p>{event.location}</p>
