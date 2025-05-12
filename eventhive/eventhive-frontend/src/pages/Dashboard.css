@@ -57,3 +57,63 @@ li {
 li:hover {
   background: #cce7e3;
 }
+
+/* Dashboard table styles */
+.event-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.event-table th,
+.event-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.event-table th {
+  background-color: #116e68;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.event-table td {
+  background-color: #fafafa;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.event-table tr:hover td {
+  background-color: #f1fdfc;
+}
+
+.event-table button {
+  margin-right: 8px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.event-table button:hover {
+  opacity: 0.9;
+}
+
+.event-table button:first-of-type {
+  background-color: #f0ad4e; /* edit = orange */
+  color: white;
+}
+
+.event-table button:last-of-type {
+  background-color: #d9534f; /* delete = red */
+  color: white;
+}
