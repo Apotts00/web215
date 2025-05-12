@@ -71,3 +71,14 @@ body {
     font-size: 0.9rem;
     color: #d9534f;
   }
+
+.success-message {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
