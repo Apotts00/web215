@@ -13,14 +13,14 @@ const EventPage = () => {
     const fetchEvent = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`eventhive-55x2.onrender.com/api/events/${id}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-        setEvent(response.data);
-      } catch (err) {
-        console.error(err?.response?.data || err.message);
-      }
-    };
+        const response = await fetch(`https://eventhive-55x2.onrender.com/api/events/${id}`, {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+});
+const data = await response.json();
+setEvent(data);
+
     fetchEvent();
   }, [id]);
 
