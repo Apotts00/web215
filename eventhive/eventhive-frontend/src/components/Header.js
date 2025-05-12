@@ -15,7 +15,7 @@ const Header = () => {
       <h1 className="logo">🎉Welcome to EventHive🎉</h1>
       <nav>
         <Link to="/">Home</Link>
-        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/dashboard">Create Event</Link>
         <Link to="/eventpage">Events Page</Link>
         <button className="logout-btn" onClick={handleLogout}>Logout</button>
       </nav>
