@@ -7,7 +7,6 @@ const Dashboard = () => {
   const [events, setEvents] = useState([]);
   const [newEventName, setNewEventName] = useState('');
   const [newEventDescription, setNewEventDescription] = useState('');
-  const [newEventLocation, setNewEventLocation] = useState('');
   const [newEventDate, setNewEventDate] = useState('');
   const [editingEventId, setEditingEventId] = useState(null);
   const [editedEvent, setEditedEvent] = useState({ title: '', description: '', location: '', date: '' });
@@ -63,7 +62,6 @@ const Dashboard = () => {
       body: JSON.stringify({
         title: newEventName,
         description: newEventDescription,
-        location: newEventLocation,
         date: newEventDate,
         checklist: []
       })
@@ -80,7 +78,6 @@ const Dashboard = () => {
 
     setNewEventName('');
     setNewEventDescription('');
-    setNewEventLocation('');
     setNewEventDate('');
   } catch (err) {
     console.error(err.message);
@@ -100,7 +97,6 @@ const Dashboard = () => {
     setEditedEvent({
       title: event.title,
       description: event.description,
-      location: event.location,
       date: event.date.slice(0, 10)
     });
   };
@@ -163,13 +159,6 @@ const Dashboard = () => {
           placeholder="Event Description"
           value={newEventDescription}
           onChange={(e) => setNewEventDescription(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Event Location"
-          value={newEventLocation}
-          onChange={(e) => setNewEventLocation(e.target.value)}
           required
         />
         <input
