@@ -171,47 +171,6 @@ const Dashboard = () => {
         />
         <button type="submit">Create Event</button>
       </form>
-
-      <table className="event-table">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Location</th>
-            <th>Date</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {events.map((event) => (
-            <tr key={event._id}>
-              {editingEventId === event._id ? (
-                <>
-                  <td><input type="text" value={editedEvent.title} onChange={(e) => setEditedEvent({ ...editedEvent, title: e.target.value })} /></td>
-                  <td><textarea value={editedEvent.description} onChange={(e) => setEditedEvent({ ...editedEvent, description: e.target.value })} /></td>
-                  <td><input type="text" value={editedEvent.location} onChange={(e) => setEditedEvent({ ...editedEvent, location: e.target.value })} /></td>
-                  <td><input type="date" value={editedEvent.date} onChange={(e) => setEditedEvent({ ...editedEvent, date: e.target.value })} /></td>
-                  <td>
-                    <button onClick={(e) => handleUpdateEvent(e, event._id)}>Save</button>
-                    <button onClick={() => setEditingEventId(null)}>Cancel</button>
-                  </td>
-                </>
-              ) : (
-                <>
-                  <td onClick={() => handleEventClick(event._id)}>{event.title}</td>
-                  <td>{event.description}</td>
-                  <td>{event.location}</td>
-                  <td>{new Date(event.date).toLocaleDateString()}</td>
-                  <td>
-                    <button onClick={() => startEditing(event)}>Edit</button>
-                    <button onClick={() => handleDeleteEvent(event._id)}>Delete</button>
-                  </td>
-                </>
-              )}
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </div>
   );
 };
