@@ -5,33 +5,43 @@ import './Login.css';
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await fetch('https://eventhive-55x2.onrender.com/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email, password })
-      });
+  e.preventDefault();
+  try {
+    const res = await fetch('https://eventhive-55x2.onrender.com/api/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, email, password })
+    });
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || 'Registration failed');
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.msg || 'Registration failed');
 
-      navigate('/login');
-    } catch (err) {
-      console.error(err.message);
-      setError(err.message);
-    }
-  };
+    navigate('/login');
+  } catch (err) {
+    console.error(err.message);
+    setError(err.message);
+  }
+};
+
 
   return (
     <div>
       <h2>Register</h2>
+    <input
+  type="text"
+  placeholder="Username"
+  value={username}
+  onChange={(e) => setUsername(e.target.value)}
+  required
+/>
+
       <form onSubmit={handleSubmit}>
         <input
           type="email"
