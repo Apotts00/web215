@@ -11,17 +11,27 @@ const Login = () => {
 
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post('https://eventhive-55x2.onrender.com/api/auth/login',  { email, password });
-      localStorage.setItem('token', res.data.token);
-      navigate('/dashboard');
-    } catch (err) {
-  console.error(err.response?.data || err.message);
-  setError(err.response?.data?.message || 'Login failed');
-}
+  e.preventDefault();
+  try {
+    const res = await fetch('https://eventhive-55x2.onrender.com/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    });
 
-  };
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Login failed');
+
+    localStorage.setItem('token', data.token);
+    navigate('/dashboard');
+  } catch (err) {
+    console.error(err.message);
+    setError(err.message);
+  }
+};
+
 
   return (
     <div>
