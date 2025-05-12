@@ -69,8 +69,10 @@ const Dashboard = () => {
     const data = await response.json();
     if (!response.ok) throw new Error(data.msg || 'Failed to create event');
 
-    // Redirect to the new event page
-    navigate(`/event/${data._id}`);
+    setSuccessMessage('Event created successfully!');
+    setTimeout(() => {
+      navigate(`/event/${data._id}`);
+    }, 1500);
 
     // Optionally clear the form
     setNewEventName('');
@@ -81,6 +83,7 @@ const Dashboard = () => {
     console.error(err.message);
   }
 };
+
 
 
   const handleEventClick = (id) => {
