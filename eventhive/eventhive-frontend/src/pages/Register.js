@@ -5,32 +5,37 @@ import './Login.css';
 const Register = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState(''); 
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const res = await fetch('https://eventhive-55x2.onrender.com/api/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ username, email, password })
-    });
+    e.preventDefault();
+    setError('');
+    setSuccess('');
+    try {
+      const res = await fetch('https://eventhive-55x2.onrender.com/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, email, password })
+      });
 
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.msg || 'Registration failed');
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.msg || 'Registration failed');
 
-    navigate('/login');
-  } catch (err) {
-    console.error(err.message);
-    setError(err.message);
-  }
-};
-  
-return (
+      localStorage.setItem('token', data.token);
+      setSuccess('Registration successful! Redirecting...');
+      setTimeout(() => navigate('/dashboard'), 1500);
+    } catch (err) {
+      console.error(err.message);
+      setError(err.message);
+    }
+  };
+
+  return (
     <div>
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
@@ -56,7 +61,10 @@ return (
           required
         />
         <button type="submit">Register</button>
+
+        {success && <p className="success-message">{success}</p>}
         {error && <p className="error-message">{error}</p>}
+
         <p className="login-link">
           Already have an account? <Link to="/login">Login here</Link>.
         </p>
@@ -66,3 +74,4 @@ return (
 };
 
 export default Register;
+
