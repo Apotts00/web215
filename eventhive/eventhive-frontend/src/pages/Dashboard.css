@@ -117,3 +117,9 @@ li:hover {
   background-color: #d9534f; /* delete = red */
   color: white;
 }
+
+.success-message {
+  color: green;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
