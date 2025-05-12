@@ -66,7 +66,6 @@ const EventPage = () => {
 
   return (
     <div>
-    <Header />
       <h2>{event.title}</h2>
       <h3>Checklist</h3>
       <ul>
