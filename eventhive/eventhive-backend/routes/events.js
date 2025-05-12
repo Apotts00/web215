@@ -62,4 +62,32 @@ router.post('/:id/checklist', authMiddleware, async (req, res) => {
   }
 });
 
+// Update event
+router.put('/:id', authMiddleware, async (req, res) => {
+  try {
+    const { title, description, location, date } = req.body;
+    const updatedEvent = await Event.findByIdAndUpdate(
+      req.params.id,
+      { title, description, location, date },
+      { new: true }
+    );
+    res.json(updatedEvent);
+  } catch (err) {
+    console.error('Error updating event:', err.message);
+    res.status(500).json({ msg: 'Server error while updating event' });
+  }
+});
+
+// Delete event
+router.delete('/:id', authMiddleware, async (req, res) => {
+  try {
+    await Event.findByIdAndDelete(req.params.id);
+    res.json({ msg: 'Event deleted' });
+  } catch (err) {
+    console.error('Error deleting event:', err.message);
+    res.status(500).json({ msg: 'Server error while deleting event' });
+  }
+});
+
+
 module.exports = router;
