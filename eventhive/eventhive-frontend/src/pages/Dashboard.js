@@ -9,7 +9,7 @@ const Dashboard = () => {
   const [newEventLocation, setNewEventLocation] = useState('');
   const [newEventDate, setNewEventDate] = useState('');
   const [editingEventId, setEditingEventId] = useState(null);
-  const [editedTitle, setEditedTitle] = useState('');
+  const [editedEvent, setEditedEvent] = useState({ title: '', description: '', location: '', date: '' });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -84,7 +84,12 @@ const Dashboard = () => {
 
   const startEditing = (event) => {
     setEditingEventId(event._id);
-    setEditedTitle(event.title);
+    setEditedEvent({
+      title: event.title,
+      description: event.description,
+      location: event.location,
+      date: event.date.slice(0, 10)
+    });
   };
 
   const handleUpdateEvent = async (e, id) => {
@@ -97,13 +102,13 @@ const Dashboard = () => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({ title: editedTitle })
+        body: JSON.stringify(editedEvent)
       });
 
       const updated = await response.json();
       if (!response.ok) throw new Error(updated.msg || 'Failed to update event');
 
-      setEvents(events.map(ev => (ev._id === id ? { ...ev, title: updated.title } : ev)));
+      setEvents(events.map(ev => (ev._id === id ? updated : ev)));
       setEditingEventId(null);
     } catch (err) {
       console.error('Edit failed:', err.message);
@@ -111,6 +116,7 @@ const Dashboard = () => {
   };
 
   const handleDeleteEvent = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this event?')) return;
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(`https://eventhive-55x2.onrender.com/api/events/${id}`, {
@@ -168,8 +174,25 @@ const Dashboard = () => {
               <form onSubmit={(e) => handleUpdateEvent(e, event._id)}>
                 <input
                   type="text"
-                  value={editedTitle}
-                  onChange={(e) => setEditedTitle(e.target.value)}
+                  value={editedEvent.title}
+                  onChange={(e) => setEditedEvent({ ...editedEvent, title: e.target.value })}
+                  required
+                />
+                <textarea
+                  value={editedEvent.description}
+                  onChange={(e) => setEditedEvent({ ...editedEvent, description: e.target.value })}
+                  required
+                />
+                <input
+                  type="text"
+                  value={editedEvent.location}
+                  onChange={(e) => setEditedEvent({ ...editedEvent, location: e.target.value })}
+                  required
+                />
+                <input
+                  type="date"
+                  value={editedEvent.date}
+                  onChange={(e) => setEditedEvent({ ...editedEvent, date: e.target.value })}
                   required
                 />
                 <button type="submit">Save</button>
@@ -190,5 +213,6 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
 
 
