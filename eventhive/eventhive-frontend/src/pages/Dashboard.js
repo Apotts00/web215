@@ -20,7 +20,7 @@ const Dashboard = () => {
           navigate('/login');
           return;
         }
-        const response = await axios.get(`${API_URL}/api/eventpage`, {
+        const response = await axios.get(`https://eventhive-55x2.onrender.com/api/eventpage`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         console.log('Fetched events:', response.data);
