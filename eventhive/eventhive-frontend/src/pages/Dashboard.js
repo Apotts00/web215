@@ -48,36 +48,40 @@ const Dashboard = () => {
   }, [navigate]);
 
   const handleCreateEvent = async (e) => {
-    e.preventDefault();
-    try {
-      const token = localStorage.getItem('token');
-      const response = await fetch('https://eventhive-55x2.onrender.com/api/events', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          title: newEventName,
-          description: newEventDescription,
-          location: newEventLocation,
-          date: newEventDate,
-          checklist: []
-        })
-      });
+  e.preventDefault();
+  try {
+    const token = localStorage.getItem('token');
+    const response = await fetch('https://eventhive-55x2.onrender.com/api/events', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        title: newEventName,
+        description: newEventDescription,
+        location: newEventLocation,
+        date: newEventDate,
+        checklist: []
+      })
+    });
 
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.msg || 'Failed to create event');
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.msg || 'Failed to create event');
 
-      setEvents([...events, data]);
-      setNewEventName('');
-      setNewEventDescription('');
-      setNewEventLocation('');
-      setNewEventDate('');
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
+    // Redirect to the new event page
+    navigate(`/event/${data._id}`);
+
+    // Optionally clear the form
+    setNewEventName('');
+    setNewEventDescription('');
+    setNewEventLocation('');
+    setNewEventDate('');
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
 
   const handleEventClick = (id) => {
     navigate(`/event/${id}`);
