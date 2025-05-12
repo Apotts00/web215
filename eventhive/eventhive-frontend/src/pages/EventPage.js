@@ -80,6 +80,7 @@ const EventPage = () => {
         placeholder="Add checklist item"
       />
       <button onClick={handleAddItem}>Add Item</button>
+      <button onClick={() => navigate('/dashboard')}>← Back to Dashboard</button>
     </div>
   );
 };
