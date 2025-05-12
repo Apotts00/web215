@@ -67,6 +67,20 @@ const EventPage = () => {
   return (
     <div>
       <h2>{event.title}</h2>
+
+  <h3>Location</h3>
+<p>{event.location}</p>
+
+<iframe
+  width="100%"
+  height="300"
+  style={{ border: 0, borderRadius: '8px', marginTop: '10px' }}
+  loading="lazy"
+  allowFullScreen
+  referrerPolicy="no-referrer-when-downgrade"
+  src={`https://www.google.com/maps?q=${encodeURIComponent(event.location)}&output=embed`}
+/>
+
       <h3>Checklist</h3>
       <ul>
         {event.checklist.map((item, index) => (
