@@ -11,6 +11,7 @@ const Dashboard = () => {
   const [newEventDate, setNewEventDate] = useState('');
   const [editingEventId, setEditingEventId] = useState(null);
   const [editedEvent, setEditedEvent] = useState({ title: '', description: '', location: '', date: '' });
+  const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
