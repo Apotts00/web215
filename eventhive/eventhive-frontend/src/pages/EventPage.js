@@ -7,6 +7,7 @@ const EventPage = () => {
   const [events, setEvents] = useState([]);
   const [editingEventId, setEditingEventId] = useState(null);
   const [editedEvent, setEditedEvent] = useState({ title: '', description: '', location: '', date: '' });
+  const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -58,6 +59,8 @@ const EventPage = () => {
 
       setEvents(events.map(ev => (ev._id === id ? updated : ev)));
       setEditingEventId(null);
+      setSuccessMessage('Event updated successfully!');
+      setTimeout(() => setSuccessMessage(''), 2000);
     } catch (err) {
       console.error('Edit failed:', err.message);
     }
@@ -74,6 +77,8 @@ const EventPage = () => {
 
       if (!response.ok) throw new Error('Failed to delete event');
       setEvents(events.filter(ev => ev._id !== id));
+      setSuccessMessage('Event deleted successfully!');
+      setTimeout(() => setSuccessMessage(''), 2000);
     } catch (err) {
       console.error('Delete failed:', err.message);
     }
@@ -81,7 +86,9 @@ const EventPage = () => {
 
   return (
     <div>
-      <h2>All Events</h2>
+      <h2>Your Events</h2>
+      {successMessage && <p className="success-message">{successMessage}</p>}
+      <button className="back-button" onClick={() => navigate('/dashboard')}>← Back to Dashboard</button>
       <table className="event-table">
         <thead>
           <tr>
@@ -127,3 +134,4 @@ const EventPage = () => {
 };
 
 export default EventPage;
+
