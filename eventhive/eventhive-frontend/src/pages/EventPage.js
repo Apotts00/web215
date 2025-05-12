@@ -19,6 +19,7 @@ const EventPage = () => {
         });
 
         const data = await response.json();
+        console.log('Fetched events from API:', data);
         if (!response.ok) throw new Error(data.message || 'Failed to fetch events');
 
         setEvents(data);
