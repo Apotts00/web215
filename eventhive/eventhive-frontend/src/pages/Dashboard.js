@@ -167,52 +167,50 @@ const Dashboard = () => {
         <button type="submit">Create Event</button>
       </form>
 
-      <ul>
-        {events.map((event, index) => (
-          <li key={event._id || index}>
-            {editingEventId === event._id ? (
-              <form onSubmit={(e) => handleUpdateEvent(e, event._id)}>
-                <input
-                  type="text"
-                  value={editedEvent.title}
-                  onChange={(e) => setEditedEvent({ ...editedEvent, title: e.target.value })}
-                  required
-                />
-                <textarea
-                  value={editedEvent.description}
-                  onChange={(e) => setEditedEvent({ ...editedEvent, description: e.target.value })}
-                  required
-                />
-                <input
-                  type="text"
-                  value={editedEvent.location}
-                  onChange={(e) => setEditedEvent({ ...editedEvent, location: e.target.value })}
-                  required
-                />
-                <input
-                  type="date"
-                  value={editedEvent.date}
-                  onChange={(e) => setEditedEvent({ ...editedEvent, date: e.target.value })}
-                  required
-                />
-                <button type="submit">Save</button>
-                <button type="button" onClick={() => setEditingEventId(null)}>Cancel</button>
-              </form>
-            ) : (
-              <>
-                <span onClick={() => handleEventClick(event._id)}>{event.title}</span>
-                <button onClick={() => startEditing(event)}>Edit</button>
-                <button onClick={() => handleDeleteEvent(event._id)}>Delete</button>
-              </>
-            )}
-          </li>
-        ))}
-      </ul>
+      <table className="event-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Location</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {events.map((event) => (
+            <tr key={event._id}>
+              {editingEventId === event._id ? (
+                <>
+                  <td><input type="text" value={editedEvent.title} onChange={(e) => setEditedEvent({ ...editedEvent, title: e.target.value })} /></td>
+                  <td><textarea value={editedEvent.description} onChange={(e) => setEditedEvent({ ...editedEvent, description: e.target.value })} /></td>
+                  <td><input type="text" value={editedEvent.location} onChange={(e) => setEditedEvent({ ...editedEvent, location: e.target.value })} /></td>
+                  <td><input type="date" value={editedEvent.date} onChange={(e) => setEditedEvent({ ...editedEvent, date: e.target.value })} /></td>
+                  <td>
+                    <button onClick={(e) => handleUpdateEvent(e, event._id)}>Save</button>
+                    <button onClick={() => setEditingEventId(null)}>Cancel</button>
+                  </td>
+                </>
+              ) : (
+                <>
+                  <td onClick={() => handleEventClick(event._id)}>{event.title}</td>
+                  <td>{event.description}</td>
+                  <td>{event.location}</td>
+                  <td>{new Date(event.date).toLocaleDateString()}</td>
+                  <td>
+                    <button onClick={() => startEditing(event)}>Edit</button>
+                    <button onClick={() => handleDeleteEvent(event._id)}>Delete</button>
+                  </td>
+                </>
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
 
 export default Dashboard;
-
 
 
