@@ -11,31 +11,41 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-          navigate('/login');
-          return;
-        }
-
-        const response = await fetch('https://eventhive-55x2.onrender.com/api/events', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-
-        const result = await response.json();
-        const data = Array.isArray(result) ? result : result.events || [];
-        setEvents(data);
-      } catch (err) {
-        console.error('Error fetching events:', err.message);
+  const fetchEvents = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
         navigate('/login');
+        return;
       }
-    };
 
-    fetchEvents();
-  }, [navigate]);
+      const response = await fetch('https://eventhive-55x2.onrender.com/api/events', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      // Explicitly handle bad token or unauthorized responses
+      if (response.status === 400 || response.status === 401) {
+        console.warn('Token invalid or expired. Logging out.');
+        localStorage.removeItem('token');
+        navigate('/login');
+        return;
+      }
+
+      const result = await response.json();
+      const data = Array.isArray(result) ? result : result.events || [];
+      setEvents(data);
+    } catch (err) {
+      console.error('Error fetching events:', err.message);
+      localStorage.removeItem('token'); // fallback cleanup
+      navigate('/login');
+    }
+  };
+
+  fetchEvents();
+}, [navigate]);
+
 
   const handleCreateEvent = async (e) => {
     e.preventDefault();
