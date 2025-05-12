@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 
@@ -19,21 +18,19 @@ const Dashboard = () => {
           navigate('/login');
           return;
         }
-        const response = await fetch('https://eventhive-55x2.onrender.com/api/events', {
-  headers: {
-    Authorization: `Bearer ${token}`
-  }
-});
-const result = await response.json();
-const data = Array.isArray(result) ? result : result.events || [];
-setEvents(data);
 
+        const response = await fetch('https://eventhive-55x2.onrender.com/api/events', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        const result = await response.json();
+        const data = Array.isArray(result) ? result : result.events || [];
+        setEvents(data);
       } catch (err) {
-        console.error('Error fetching events:', err.response?.data || err.message);
-        if (err.response?.status === 401) {
-          localStorage.removeItem('token');
-          navigate('/login');
-        }
+        console.error('Error fetching events:', err.message);
+        navigate('/login');
       }
     };
 
@@ -44,26 +41,35 @@ setEvents(data);
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post(
-        `https://eventhive-55x2.onrender.com/api/events`,
-        {
+
+      const response = await fetch('https://eventhive-55x2.onrender.com/api/events', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({
           title: newEventName,
           description: newEventDescription,
           location: newEventLocation,
           date: newEventDate,
-          checklist: [],
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      setEvents([...events, response.data]);
+          checklist: []
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to create event');
+      }
+
+      setEvents([...events, data]);
       setNewEventName('');
       setNewEventDescription('');
       setNewEventLocation('');
       setNewEventDate('');
     } catch (err) {
-      console.error(err.response?.data || err.message);
+      console.error(err.message);
     }
   };
 
@@ -115,3 +121,4 @@ setEvents(data);
 };
 
 export default Dashboard;
+
