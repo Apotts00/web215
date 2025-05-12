@@ -19,14 +19,15 @@ const Dashboard = () => {
           navigate('/login');
           return;
         }
-        const response = await axios.get(`https://eventhive-55x2.onrender.com/api/events`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        console.log('Fetched events:', response.data);
-        const data = Array.isArray(response.data)
-          ? response.data
-          : response.data.events || [];
-        setEvents(data);
+        const response = await fetch('https://eventhive-55x2.onrender.com/api/events', {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+});
+const result = await response.json();
+const data = Array.isArray(result) ? result : result.events || [];
+setEvents(data);
+
       } catch (err) {
         console.error('Error fetching events:', err.response?.data || err.message);
         if (err.response?.status === 401) {
