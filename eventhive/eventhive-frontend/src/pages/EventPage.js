@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
-const API_URL = process.env.REACT_APP_API_URL;
 
 const EventPage = () => {
   const { id } = useParams();
@@ -14,12 +11,22 @@ const EventPage = () => {
       try {
         const token = localStorage.getItem('token');
         const response = await fetch(`https://eventhive-55x2.onrender.com/api/events/${id}`, {
-  headers: {
-    Authorization: `Bearer ${token}`
-  }
-});
-const data = await response.json();
-setEvent(data);
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || 'Failed to fetch event');
+        }
+
+        setEvent(data);
+      } catch (err) {
+        console.error('Error fetching event:', err.message);
+      }
+    };
 
     fetchEvent();
   }, [id]);
@@ -27,17 +34,29 @@ setEvent(data);
   const handleAddItem = async () => {
     try {
       const token = localStorage.getItem('token');
-     await axios.post(`${API_URL}/api/events/${id}/checklist`,
-  { item: checklistItem },
-  { headers: { Authorization: `Bearer ${token}` } }
-);
+      const response = await fetch(`https://eventhive-55x2.onrender.com/api/events/${id}/checklist`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ item: checklistItem })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to add checklist item');
+      }
+
       setEvent((prevEvent) => ({
         ...prevEvent,
         checklist: [...prevEvent.checklist, { item: checklistItem, completed: false }]
       }));
+
       setChecklistItem('');
     } catch (err) {
-      console.error(err?.response?.data || err.message);
+      console.error('Error adding checklist item:', err.message);
     }
   };
 
