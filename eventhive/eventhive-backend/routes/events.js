@@ -25,12 +25,11 @@ router.get('/:id', authMiddleware, async (req, res) => {
 // POST create new event
 router.post('/', authMiddleware, async (req, res) => {
   try {
-    const { title, description, location, date, checklist } = req.body;
+    const { title, description, date, checklist } = req.body;
 
     const newEvent = new Event({
       title,
       description,
-      location,
       date,
       checklist,
       user: req.user.id,
@@ -74,10 +73,10 @@ router.post('/:id/checklist', authMiddleware, async (req, res) => {
 // Update event
 router.put('/:id', authMiddleware, async (req, res) => {
   try {
-    const { title, description, location, date } = req.body;
+    const { title, description, date } = req.body;
     const updatedEvent = await Event.findByIdAndUpdate(
       req.params.id,
-      { title, description, location, date },
+      { title, description, date },
       { new: true }
     );
     res.json(updatedEvent);
