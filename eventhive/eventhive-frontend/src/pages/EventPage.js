@@ -88,7 +88,7 @@ const EventPage = () => {
     <div>
       <h2>Your Events</h2>
       {successMessage && <p className="success-message">{successMessage}</p>}
-      <button className="back-button" onClick={() => navigate('/dashboard')}>← Back to Dashboard</button>
+      <button className="back-button" onClick={() => navigate('/dashboard')}>← Back to Create an Event</button>
       <table className="event-table">
         <thead>
           <tr>
